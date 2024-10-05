@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjq8rreo8wsx3"]
+
+[ext_resource type="Script" path="res://tests/test-ball.gd" id="1_0164j"]
+[ext_resource type="PackedScene" uid="uid://tu0i27pvv40y" path="res://objects/tracking-camera/tracking-camera.tscn" id="3_c6eyg"]
+[ext_resource type="PackedScene" uid="uid://b3qclm4jr03l2" path="res://objects/terrain/terrain.tscn" id="4_vren7"]
+
+[node name="Root" type="Node2D"]
+script = ExtResource("1_0164j")
+
+[node name="Terrain" parent="." instance=ExtResource("4_vren7")]
+
+[node name="Camera" parent="." instance=ExtResource("3_c6eyg")]
+position = Vector2(642, 363)
+position_smoothing_enabled = true

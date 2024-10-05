@@ -1,0 +1,27 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://d24kno2v57h0w"]
+
+[ext_resource type="Texture2D" uid="uid://bmn5e37j2emjc" path="res://objects/terrain/ld56-tileset.png" id="2_475i3"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yf0im"]
+texture = ExtResource("2_475i3")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+1:1/0 = 0
+7:2/0 = 0
+7:2/0/custom_data_0 = "ball"
+6:2/0 = 0
+6:2/0/custom_data_0 = "player"
+6:0/0 = 0
+6:0/0/custom_data_0 = "spike"
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "item-kind"
+custom_data_layer_0/type = 4
+sources/1 = SubResource("TileSetAtlasSource_yf0im")

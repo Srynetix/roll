@@ -1,0 +1,145 @@
+[gd_scene load_steps=20 format=3 uid="uid://c4rmt0w11fmb1"]
+
+[ext_resource type="Script" path="res://objects/ball/ball.gd" id="1_47y1m"]
+[ext_resource type="Material" uid="uid://bnd74tdyxcrri" path="res://objects/ball/absorb-fx.tres" id="2_2stx8"]
+[ext_resource type="Texture2D" uid="uid://tpkbe50qf530" path="res://objects/ball/ld56-absorb.png" id="3_0b1p2"]
+[ext_resource type="Material" uid="uid://dn04w6ujobs81" path="res://objects/ball/jump-fx.tres" id="3_ms5k4"]
+[ext_resource type="Texture2D" uid="uid://cmd7qbws0xws4" path="res://objects/ball/ball.png" id="4_42x6w"]
+[ext_resource type="Material" uid="uid://cdk1oj2q6fd1c" path="res://objects/ball/ball-material.tres" id="4_dx16b"]
+[ext_resource type="AudioStream" uid="uid://ct6ndhpt8rk6i" path="res://objects/ball/absorb.wav" id="4_gh2dg"]
+[ext_resource type="AudioStream" uid="uid://b6kg3oaiftaah" path="res://objects/ball/absorb-ball.wav" id="5_4gq1t"]
+[ext_resource type="AudioStream" uid="uid://cq4ws1d4lrrll" path="res://objects/ball/jump.wav" id="6_2dxi0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cynu2"]
+bounce = 0.25
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iqw0n"]
+size = Vector2(26, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ynte1"]
+resource_local_to_scene = true
+radius = 21.01
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyfx0"]
+atlas = ExtResource("4_42x6w")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smxib"]
+atlas = ExtResource("4_42x6w")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbdti"]
+atlas = ExtResource("4_42x6w")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c2t7t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyfx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smxib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbdti")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="ImageTexture" id="ImageTexture_y60je"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u8l76"]
+resource_local_to_scene = true
+radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qt3xe"]
+resource_local_to_scene = true
+radius = 15.0333
+
+[node name="Ball" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 7
+mass = 0.25
+physics_material_override = SubResource("PhysicsMaterial_cynu2")
+continuous_cd = 1
+max_contacts_reported = 1
+script = ExtResource("1_47y1m")
+
+[node name="AbsorbFX" type="GPUParticles2D" parent="."]
+texture_filter = 1
+emitting = false
+amount = 128
+process_material = ExtResource("2_2stx8")
+texture = ExtResource("3_0b1p2")
+lifetime = 0.5
+preprocess = 0.25
+local_coords = true
+
+[node name="BottomRotation" type="Node2D" parent="."]
+visible = false
+
+[node name="JumpFX" type="GPUParticles2D" parent="BottomRotation"]
+unique_name_in_owner = true
+position = Vector2(0, 10)
+emitting = false
+amount = 32
+process_material = ExtResource("3_ms5k4")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+
+[node name="Bottom" type="Area2D" parent="BottomRotation"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, 14)
+collision_layer = 2
+collision_mask = 7
+
+[node name="CollisionShape" type="CollisionShape2D" parent="BottomRotation/Bottom"]
+shape = SubResource("RectangleShape2D_iqw0n")
+
+[node name="Absorber" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 3
+
+[node name="CollisionShape" type="CollisionShape2D" parent="Absorber"]
+shape = SubResource("CircleShape2D_ynte1")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = ExtResource("4_dx16b")
+sprite_frames = SubResource("SpriteFrames_c2t7t")
+autoplay = "default"
+frame = 2
+frame_progress = 0.179029
+
+[node name="SpriteOverlay" type="Sprite2D" parent="."]
+texture = SubResource("ImageTexture_y60je")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_u8l76")
+
+[node name="AbsorbSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_gh2dg")
+bus = &"FX"
+
+[node name="AbsorbOneSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_4gq1t")
+bus = &"FX"
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_2dxi0")
+bus = &"FX"
+
+[node name="HitBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_qt3xe")

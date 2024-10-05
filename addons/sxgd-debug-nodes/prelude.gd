@@ -3,3 +3,4 @@ extends Node
 
 const DebugConsole := preload("res://addons/sxgd-debug-nodes/nodes/debug-console.gd")
 const DebugTools := preload("res://addons/sxgd-debug-nodes/nodes/debug-tools.gd")
+const NodeTracer := preload("res://addons/sxgd-debug-nodes/nodes/node-tracer.gd")

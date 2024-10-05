@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cobhdnyk746t2"]
+
+[ext_resource type="Script" path="res://objects/mouse-joint/mouse-joint.gd" id="1_inuck"]
+
+[node name="MouseJoint" type="Marker2D"]
+script = ExtResource("1_inuck")
