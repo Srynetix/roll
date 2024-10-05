@@ -1,0 +1,5 @@
+# sxgd-core
+
+## Dependencies
+
+None

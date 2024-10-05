@@ -1,0 +1,20 @@
+# Prelude of the library
+extends Node
+
+const ArrayExt := preload("res://addons/sxgd-core/extensions/array.gd")
+const BufferExt := preload("res://addons/sxgd-core/extensions/buffer.gd")
+const ColorExt := preload("res://addons/sxgd-core/extensions/color.gd")
+const ContainerExt := preload("res://addons/sxgd-core/extensions/container.gd")
+const FileExt := preload("res://addons/sxgd-core/extensions/file.gd")
+const InputExt := preload("res://addons/sxgd-core/extensions/input.gd")
+const JsonExt := preload("res://addons/sxgd-core/extensions/json.gd")
+const MathExt := preload("res://addons/sxgd-core/extensions/math.gd")
+const NodeExit := preload("res://addons/sxgd-core/extensions/node.gd")
+const LoggerExt := preload("res://addons/sxgd-core/extensions/logger.gd")
+const OsExt := preload("res://addons/sxgd-core/extensions/os.gd")
+const RandExt := preload("res://addons/sxgd-core/extensions/rand.gd")
+const ShaderExt := preload("res://addons/sxgd-core/extensions/shader.gd")
+const TextExt := preload("res://addons/sxgd-core/extensions/text.gd")
+const TileMapExt := preload("res://addons/sxgd-core/extensions/tilemap.gd")
+const UiExt := preload("res://addons/sxgd-core/extensions/ui.gd")
+const UuidExt := preload("res://addons/sxgd-core/extensions/uuid.gd")

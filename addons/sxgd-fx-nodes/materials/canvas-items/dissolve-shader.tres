@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://8pb2jwf70qbw"]
+
+[ext_resource type="Shader" path="res://addons/sxgd-fx-nodes/materials/canvas-items/dissolve-shader.gdshader" id="1_8kpes"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kqcc2"]
+resource_local_to_scene = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_owbgr"]
+resource_local_to_scene = true
+noise = SubResource("FastNoiseLite_kqcc2")
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_8kpes")
+shader_parameter/dissolution_level = 0.5
+shader_parameter/edge_width = 0.0
+shader_parameter/edge_color1 = Color(1, 1, 1, 1)
+shader_parameter/edge_color2 = Color(1, 1, 1, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_owbgr")
