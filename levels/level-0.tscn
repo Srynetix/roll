@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm235ae50m67y"]
+
+[ext_resource type="Script" path="res://objects/terrain/terrain.gd" id="1_yq4na"]
+[ext_resource type="PackedScene" uid="uid://bwm4dbsp6kt31" path="res://screens/music-bg.tscn" id="2_8qgl1"]
+[ext_resource type="TileSet" uid="uid://d24kno2v57h0w" path="res://objects/terrain/terrain.tres" id="2_ilsgo"]
+
+[node name="Level" type="Node2D" node_paths=PackedStringArray("music_bg", "middleground", "foreground")]
+script = ExtResource("1_yq4na")
+music_bg = NodePath("CanvasLayer/MusicBG")
+middleground = NodePath("Middleground")
+foreground = NodePath("Foreground")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="MusicBG" parent="CanvasLayer" instance=ExtResource("2_8qgl1")]
+audio_bus_output = "Music"
+vu_count = 32
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+
+[node name="Background" type="TileMapLayer" parent="Parallax2D"]
+texture_filter = 1
+tile_set = ExtResource("2_ilsgo")
+
+[node name="Middleground" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_set = ExtResource("2_ilsgo")
+
+[node name="Foreground" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_set = ExtResource("2_ilsgo")
+
+[node name="Decorations" type="TileMapLayer" parent="."]
+modulate = Color(1, 1, 1, 0.572549)
+texture_filter = 1
+tile_set = ExtResource("2_ilsgo")

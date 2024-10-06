@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://objects/terrain/spike-zone.gd" id="1_o4iqj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_terla"]
-size = Vector2(32, 32)
+size = Vector2(32, 26)
 
 [node name="SpikeZone" type="Area2D"]
 collision_layer = 4
@@ -11,4 +11,5 @@ collision_mask = 2
 script = ExtResource("1_o4iqj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_terla")

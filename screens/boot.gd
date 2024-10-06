@@ -9,7 +9,7 @@ func _ready() -> void:
 
 	MaterialPreloader.material_all_finished.connect(func():
 		await get_tree().process_frame
-		get_tree().change_scene_to_file("res://tests/test-ball.tscn")
+		get_tree().change_scene_to_packed(GameData.TitleScreen)
 	)
 
 	MaterialPreloader.run_preloader()

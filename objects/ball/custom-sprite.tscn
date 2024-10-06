@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://rrl2n8nyo0wb"]
+
+[ext_resource type="Script" path="res://objects/ball/custom-sprite.gd" id="1_dc6q3"]
+
+[node name="CustomSprite" type="Sprite2D"]
+script = ExtResource("1_dc6q3")

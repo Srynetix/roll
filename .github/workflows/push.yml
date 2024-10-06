@@ -1,0 +1,38 @@
+name: Push builds
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-web:
+    permissions:
+      contents: write
+
+    uses: Srynetix/godot-github-workflows/.github/workflows/build-game-4.3.yml@main
+    with:
+      platform: Web
+      name: roll
+      output_name: index.html
+
+  build-windows:
+    uses: Srynetix/godot-github-workflows/.github/workflows/build-game-4.3.yml@main
+    with:
+      platform: Windows
+      name: roll
+      output_name: ROLL.exe
+
+  build-mac:
+    uses: Srynetix/godot-github-workflows/.github/workflows/build-game-4.3.yml@main
+    with:
+      platform: macOS
+      name: roll
+      output_name: ROLL.macos.zip
+
+  build-linux:
+    uses: Srynetix/godot-github-workflows/.github/workflows/build-game-4.3.yml@main
+    with:
+      platform: Linux
+      name: roll
+      output_name: ROLL.linux.x86_64

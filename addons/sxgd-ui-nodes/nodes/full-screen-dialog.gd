@@ -21,6 +21,7 @@ func show_dialog() -> void:
 
 	visible = true
 	_tween.tween_property(self, "modulate", Color.WHITE, 0.25).from(Color.TRANSPARENT).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	_on_show()
 
 ## Hide dialog.
 func hide_dialog() -> void:
@@ -78,3 +79,6 @@ func _ready() -> void:
 	visible = false
 	_title_label.text = title
 	_title_label.visible = show_title
+
+func _on_show() -> void:
+	pass

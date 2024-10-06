@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bhfloe7an18tx"]
+
+[ext_resource type="Shader" path="res://objects/ball/outline.gdshader" id="1_herks"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_herks")
+shader_parameter/line_color = Color(1, 0, 0.958315, 1)
+shader_parameter/line_scale = 1.0

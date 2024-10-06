@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dxwr7j2ht3xog"]
+
+[ext_resource type="Shader" path="res://objects/ball/ball-grayscale.gdshader" id="1_bwh5v"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_bwh5v")
+shader_parameter/ratio = 0.0

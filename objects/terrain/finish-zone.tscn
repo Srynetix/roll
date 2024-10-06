@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://18if6bfssr5m"]
+
+[ext_resource type="Script" path="res://objects/terrain/finish-zone.gd" id="1_dt564"]
+[ext_resource type="Texture2D" uid="uid://bmn5e37j2emjc" path="res://objects/terrain/ld56-tileset.png" id="1_pj2ss"]
+[ext_resource type="Material" uid="uid://17lh315d8avc" path="res://objects/terrain/finish-zone-particles.tres" id="2_y746b"]
+[ext_resource type="Texture2D" uid="uid://tpkbe50qf530" path="res://objects/ball/ld56-absorb.png" id="3_3wx11"]
+[ext_resource type="Material" uid="uid://bhfloe7an18tx" path="res://objects/terrain/finish-zone-material.tres" id="3_c8m3h"]
+[ext_resource type="AudioStream" uid="uid://r4qpkiivbqr6" path="res://objects/ball/success.wav" id="6_nreeg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fb20"]
+size = Vector2(32, 32)
+
+[node name="FinishZone" type="Area2D"]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("1_dt564")
+metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+position = Vector2(16, 0)
+amount = 128
+process_material = ExtResource("2_y746b")
+texture = ExtResource("3_3wx11")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = ExtResource("3_c8m3h")
+texture = ExtResource("1_pj2ss")
+region_enabled = true
+region_rect = Rect2(224, 96, 32, 32)
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7fb20")
+metadata/_edit_lock_ = true
+
+[node name="SuccessSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_nreeg")
+bus = &"FX"

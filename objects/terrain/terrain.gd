@@ -3,17 +3,19 @@ class_name GTerrain
 
 signal build_player(position)
 signal build_ball(position)
-signal build_spikes(position)
+signal build_cube(position)
+signal build_spikes(position, angle)
+signal build_finish(position, angle)
 
-@onready var _background := $Background as TileMapLayer
-@onready var _middleground := $Middleground as TileMapLayer
-@onready var _foreground := $Foreground as TileMapLayer
+@export var music_bg: GMusicBG
+@export var middleground: TileMapLayer
+@export var foreground: TileMapLayer
 
 func get_used_rect() -> Rect2i:
-	return _background.get_used_rect()
+	return middleground.get_used_rect()
 
 func get_tile_size() -> Vector2i:
-	return _background.tile_set.tile_size
+	return middleground.tile_set.tile_size
 
 func _get_tile_id_from_name(tile_set: TileSet, tile_name: String) -> Vector2i:
 	var source_id := tile_set.get_source_id(0)
@@ -30,22 +32,45 @@ func _get_tile_id_from_name(tile_set: TileSet, tile_name: String) -> Vector2i:
 
 func setup() -> void:
 	# Iterate on items in foreground layer
-	for cell_position in _foreground.get_used_cells():
-		var tile_data := _foreground.get_cell_tile_data(cell_position)
+	for cell_position in foreground.get_used_cells():
+		var tile_data := foreground.get_cell_tile_data(cell_position)
 		if tile_data:
 			var item_kind := tile_data.get_custom_data("item-kind") as String
 			if item_kind == "ball":
-				build_ball.emit(cell_position * _foreground.tile_set.tile_size)
+				build_ball.emit(cell_position * foreground.tile_set.tile_size)
 
 			elif item_kind == "player":
-				build_player.emit(cell_position * _foreground.tile_set.tile_size)
-				_foreground.set_cell(cell_position)
+				build_player.emit(cell_position * foreground.tile_set.tile_size)
+				foreground.set_cell(cell_position)
+
+			elif item_kind == "finish":
+				var tile_rotation := _get_tile_angle(foreground, cell_position)
+				build_finish.emit(cell_position * foreground.tile_set.tile_size + (foreground.tile_set.tile_size / 2.0 as Vector2i), tile_rotation)
+				foreground.set_cell(cell_position)
+
+			elif item_kind == "cube":
+				build_cube.emit(cell_position * foreground.tile_set.tile_size)
+				foreground.set_cell(cell_position)
 
 	# Iterate on items in middleground layer
-	for cell_position in _middleground.get_used_cells():
-		var tile_data := _middleground.get_cell_tile_data(cell_position)
+	for cell_position in middleground.get_used_cells():
+		var tile_data := middleground.get_cell_tile_data(cell_position)
 		if tile_data:
 			var item_kind := tile_data.get_custom_data("item-kind") as String
 			if item_kind == "spike":
-				build_spikes.emit(cell_position * _middleground.tile_set.tile_size + (_middleground.tile_set.tile_size / 2.0 as Vector2i))
+				var tile_rotation := _get_tile_angle(middleground, cell_position)
+				build_spikes.emit(cell_position * middleground.tile_set.tile_size + (middleground.tile_set.tile_size / 2.0 as Vector2i), tile_rotation)
 
+func _get_tile_angle(layer: TileMapLayer, coords: Vector2i) -> float:
+	var alt := layer.get_cell_alternative_tile(coords)
+	var is_transpose := alt & TileSetAtlasSource.TRANSFORM_TRANSPOSE
+	var is_flip_h := alt & TileSetAtlasSource.TRANSFORM_FLIP_H
+	var is_flip_v := alt & TileSetAtlasSource.TRANSFORM_FLIP_V
+
+	if is_transpose && is_flip_h:
+		return PI / 2
+	elif (!is_transpose && (is_flip_h || is_flip_v)):
+		return PI
+	elif is_transpose && is_flip_v:
+		return PI + PI / 2
+	return 0.0

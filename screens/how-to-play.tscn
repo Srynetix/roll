@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://u2bltboqt0md"]
+
+[ext_resource type="PackedScene" uid="uid://bgfc86tf10n47" path="res://tests/test-howtoplay.tscn" id="1_krf4u"]
+[ext_resource type="Script" path="res://screens/how-to-play.gd" id="1_lrf0p"]
+[ext_resource type="Theme" uid="uid://2dbhct4wbreo" path="res://screens/title-theme.tres" id="1_xv148"]
+
+[node name="HowToPlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xv148")
+script = ExtResource("1_lrf0p")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Label" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center][b]How to play[/b]
+
+Here's a demo to help your understand the controls.
+Press [b]Next[/b] once you're ready!
+[/center]"
+fit_content = true
+
+[node name="Container" type="MarginContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(640, 384)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Demo" parent="VBoxContainer/Container" instance=ExtResource("1_krf4u")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="Back" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../Next")
+focus_neighbor_right = NodePath("../Next")
+text = "Back
+"
+
+[node name="Next" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../Back")
+focus_neighbor_right = NodePath("../Back")
+text = "Next"
