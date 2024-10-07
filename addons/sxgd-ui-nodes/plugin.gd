@@ -3,7 +3,7 @@ extends EditorPlugin
 
 const Prelude := preload("res://addons/sxgd-ui-nodes/prelude.gd")
 
-func _enter_tree() -> void:
+func _enable_plugin() -> void:
 	add_autoload_singleton("SxUiNodes", "res://addons/sxgd-ui-nodes/prelude.gd")
 	add_custom_type("SxUiAutocompleteLineEdit", "LineEdit", Prelude.AutocompleteLineEdit, null)
 	add_custom_type("SxUiDoubleTap", "Node", Prelude.DoubleTap, null)
@@ -14,7 +14,7 @@ func _enter_tree() -> void:
 	add_custom_type("SxUiItemList", "ItemList", Prelude.TouchableItemList, null)
 	add_custom_type("SxUiFadingRichTextLabel", "RichTextLabel", Prelude.FadingRichTextLabel, null)
 
-func _exit_tree() -> void:
+func _disable_plugin() -> void:
 	remove_autoload_singleton("SxUiNodes")
 	remove_custom_type("SxUiAutocompleteLineEdit")
 	remove_custom_type("SxUiDoubleTap")
