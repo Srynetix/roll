@@ -3,10 +3,10 @@ extends EditorPlugin
 
 const Prelude := preload("res://addons/sxgd-scene-runner/prelude.gd")
 
-func _enter_tree() -> void:
+func _enable_plugin() -> void:
 	add_autoload_singleton("SxSceneRunner", "res://addons/sxgd-scene-runner/prelude.gd")
 	add_custom_type("SxSceneRunner", "Control", Prelude.SceneRunner, null)
 
-func _exit_tree() -> void:
+func _disable_plugin() -> void:
 	remove_autoload_singleton("SxSceneRunner")
 	remove_custom_type("SxSceneRunner")
