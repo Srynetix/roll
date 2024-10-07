@@ -22,7 +22,6 @@
 - [FL Studio](https://www.image-line.com/fl-studio/)
 
 **Assets used**:
-- [gd-plug](https://github.com/imjp94/gd-plug)
 - [Font Awesome](https://fontawesome.com/)
 
 _Good luck, and have fun!_
