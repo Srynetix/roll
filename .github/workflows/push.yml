@@ -4,35 +4,34 @@ on:
   push:
     branches:
       - main
-      - fix-html5
 
 jobs:
   build-web:
     permissions:
       contents: write
 
-    uses: ./.github/workflows/build.yml
+    uses: Srynetix/godot-github-workflows/.github/workflows/build-game-4.3.yml@main
     with:
       platform: Web
       name: roll
       output_name: index.html
 
   build-windows:
-    uses: ./.github/workflows/build.yml
+    uses: Srynetix/godot-github-workflows/.github/workflows/build-game-4.3.yml@main
     with:
       platform: Windows
       name: roll
       output_name: ROLL.exe
 
   build-mac:
-    uses: ./.github/workflows/build.yml
+    uses: Srynetix/godot-github-workflows/.github/workflows/build-game-4.3.yml@main
     with:
       platform: macOS
       name: roll
       output_name: ROLL.macos.zip
 
   build-linux:
-    uses: ./.github/workflows/build.yml
+    uses: Srynetix/godot-github-workflows/.github/workflows/build-game-4.3.yml@main
     with:
       platform: Linux
       name: roll
